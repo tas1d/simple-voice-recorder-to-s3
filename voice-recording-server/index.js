@@ -5,6 +5,8 @@ const cors = require('cors');
 
 const app = express();
 
+const bucketName = 's3-demo-bucket-voice-recordings-23192';
+
 app.use(cors({
   origin: 'http://localhost:5173',
 }));
@@ -17,7 +19,7 @@ app.post('/upload', upload.single('audio'), (req, res) => {
   const audioFile = req.file;
 
   const params = {
-    Bucket: 's3-demo-bucket-voice-recordings-23192',
+    Bucket: bucketName,
     Key: `recording-${Date.now()}.webm`,
     Body: audioFile.buffer,
     ContentType: audioFile.mimetype,
